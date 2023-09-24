@@ -2,7 +2,11 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-def eliminar_archivos_antiguos_en_carpeta(ruta_carpeta):
+#ELIMINA LAS COPIAS DE LA BASE DE DATOS QUE TENGAN UNA ANTIGUEDAD DE N DIAS
+
+n=15
+
+def eliminar_archivos_antiguos_en_carpeta(ruta_carpeta,n):
     fecha_actual = datetime.now()
     archivos=os.listdir(ruta_carpeta)
     size=len(archivos)
@@ -13,7 +17,7 @@ def eliminar_archivos_antiguos_en_carpeta(ruta_carpeta):
             fecha_creacion = datetime.fromtimestamp(os.path.getctime(ruta_archivo))
             tiempo_transcurrido = fecha_actual - fecha_creacion
 
-            if tiempo_transcurrido.days >= 15:
+            if tiempo_transcurrido.days >= n:
                 try:
                     os.remove(ruta_archivo)
                     print(f"Archivo '{archivo}' eliminado exitosamente.")
@@ -24,4 +28,4 @@ def eliminar_archivos_antiguos_en_carpeta(ruta_carpeta):
 
 # Ejemplo de uso
 ruta_carpeta = Path.home() / "Documents/DBD"
-eliminar_archivos_antiguos_en_carpeta(ruta_carpeta)
+eliminar_archivos_antiguos_en_carpeta(ruta_carpeta,n)

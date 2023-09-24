@@ -15,10 +15,12 @@ from guardadorPuntual import guardadorPuntual
 guardar #llamamos a una funcion que guarda una copia de la base de datos con su fecha y nombre
 eliminar #llamamos una funcion que eliminar una copia de la base de datos si tiene una antiguedad de 15 dias siempre quedan los ultimos 5 archivos copiados
 
+#Informacion basica de la pantalla
 ventana = tk.Tk()
-ventana.title("FichApp V 2.6.1")
+ventana.title("FichApp V 2.6.3")
 ventana.configure(bg='gray')
 
+#Funcion para guardar los datos que hay puestos en el programa
 def guardar_datos():
     try:
         
@@ -100,7 +102,7 @@ def guardar_datos():
         mostrar_mensaje(f"Error: {str(e)}","red")
 
         
-    # Limpiar los campos de entrada después de guardar los datos
+# función que sirve para limpiar los campos de entrada.
 def limpiar_entradas():
     entry_rut.delete(0, tk.END)
     entry_nombre.delete(0, tk.END)
@@ -149,6 +151,9 @@ def limpiar_entradas():
     asistereligion_var.set(False)
     locomocion_var.set(False)
     
+#funcion que carga  los datos de un alumno que se ha cargado
+#utriliza el rut para cargarlo en el sistema
+#NO MODIFICA AL ALUMNO SINO QUE CARGA SUS DATOS EN LOS RECUADROS
 def editar_alumno():
     print("dato")
     dato=buscarAlumno.busqueda()
@@ -210,17 +215,22 @@ def editar_alumno():
         selected_letra.set(alumno[43])
         selected_option.set(alumno[44])
 
+#funcion que cambia los valores vacios por la palabra Nulo para que no estén vacios
+#en el archivo word de ficha
 def obtener_valor_predeterminado(valor):
     if valor.strip() == '':
         return "Nulo"
     return valor
 
+#limpia los mensajes que genera mostrar_mensaje
 def limpiar_mensaje():
     global label_mensaje
     if label_mensaje is not None:
         label_mensaje.grid_forget()  # Eliminar el label de la ventana
         label_mensaje = None
-
+        
+#mostrar mensaje se encarga de mostrar mensajes en una zona especifica de la pantalla
+#se debe colocar el mensaje entre comillas y el color del recuadro
 def mostrar_mensaje(mensaje,color):
     global label_mensaje
     if label_mensaje is not None:
@@ -232,10 +242,12 @@ def mostrar_mensaje(mensaje,color):
 
     # Programar la limpieza del mensaje después de 3 segundos (3000 ms)
     ventana.after(3000, limpiar_mensaje)
-    
+
+#funciones basicas para continuar al siguiente recuadro
 def on_enter(event):
     event.widget.tk_focusNext().focus()
     
+
 def on_key(event):
     entry_widget = event.widget
     text = entry_widget.get()
@@ -251,6 +263,7 @@ def select_entry(entry):
     entry.focus_set()  # Establecer el foco en el cuadro de texto
     entry.select_range(0, tk.END)  # Seleccionar todo el contenido del cuadro de texto
 
+#borra todos los datos de la base de datos
 def eliminardatos():
     flag=confirmacion("¿Estás seguro que deseas eliminar los datos?")
     if flag:
@@ -266,6 +279,7 @@ def eliminardatos():
         # Cerrar la conexión a la base de datos
         conexion.close()
 
+#modifica los datos de un alumno
 def actualizardatos():
     flag = confirmacion("Este alumno ya existe. ¿Desea actualizar la información?")
     if flag:
@@ -330,6 +344,7 @@ def actualizardatos():
         mostrar_mensaje("Guardado Correctamente","green")
         limpiar_entradas()
         
+#FUNCION QUE LLAMA A VISUALIZADOR QUE GENERA LOS ARCHIVOS WORD DE LAS FICHAS
 def visualizadorejecut():
     try:
         visualizador.visualizador()
@@ -338,6 +353,9 @@ def visualizadorejecut():
         # Mostrar mensaje de error con la información de la excepción
         mostrar_mensaje(f"Error: {str(e)}","red")
 
+#VERIFICA VARIAS COSAS ANTES DE GUARDAR:
+    #RUT CORRECTO
+    #QUE LA LETRA Y EL CURSO NO SEAN NULOS
 def verificaciones():
     if  len(entry_rut.get()) != 12:
         mostrar_mensaje("Error RUT","red")
@@ -350,11 +368,13 @@ def verificaciones():
     else: guardar_datos()
 
 
+#FUNCION DE IMPRIMIR ARCHIVO, DEBERIA IMPRIMIRLO 2 VECES PERO NO FUNCIONA
 def imprimir_archivo():
     guardadorPuntual(entry_rut.get())  
     os.startfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ficha_puntual.docx"), "print")
     os.startfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ficha_puntual.docx"), "print")
-    
+
+# BOTONES QUE ESCRIBEN AUTOMATICAMENTE SI LA MADRE O EL PADRE ES APODERADO O SUPLENTE.
 def madreApod():
     entry_titular.delete(0, tk.END)
     entry_titrut.delete(0, tk.END)
@@ -388,7 +408,7 @@ def padreEmer():
     entry_emergencia.insert(0, entry_nombre_padre.get())
 
 
-# Campos de entrada
+# CAMPOS DE ENTRADA
 #=====================================================================#
 label_curso = tk.Label(ventana, text="Curso:", bg="salmon")
 label_curso.grid(row=3, column=2)
@@ -843,15 +863,11 @@ boton_emer_pad.grid(row=5, column=4)
 boton_emer_mad = tk.Button(ventana, text="Emergencia", command=madreEmer,bg="lightblue")
 boton_emer_mad.grid(row=6, column=4)
     
-#set nulos los datos base de los menues que bajan
+#SETEAR NULOS AUTOMATICAMENTE AL LOOPEAR EL PROGRAMA
 selected_letra.set("Nulo")
 selected_option.set("Nulo")
 selected_ano_madre.set("Nulo")
 selected_ano_jefe.set("Nulo")
-
-
-#esta implementacion puede consumir demaciado si el programa hace demaciadas confirmaciones
-
 
 # Iniciar el bucle de eventos de la ventana
 ventana.mainloop()

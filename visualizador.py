@@ -2,7 +2,8 @@ import sqlite3
 from datetime import date
 from docxtpl import DocxTemplate
 import os
-# Conectar a la base de datos
+
+#VISUALIZADOR SE DEDICA A GENERAR LOS ARCHIVOS DE FICHA Y LOS SEPARA POR CARPETA DE CURSOS
 
 def visualizador():
     #genera la carpeta Fichas
