@@ -3,7 +3,12 @@ from datetime import date
 from docxtpl import DocxTemplate
 import os
 # Conectar a la base de datos
+
 def visualizador():
+    #genera la carpeta Fichas
+    if not os.path.exists("fichas"):
+        os.makedirs("fichas")
+        
     conexion = sqlite3.connect('FichaAlumnos.db')
     cursor = conexion.cursor()
     
@@ -69,7 +74,9 @@ def visualizador():
             'curso': alumno[44],
             'letra': alumno[43]
             }
+            #reemplazar para este alumno los datos de la base de datos en el word
             doc.render(context)
+            #crear el archivo y guardarlo
             os.makedirs("fichas/"+str(alumno[44])+str(alumno[43]), exist_ok=True)
             doc.save("fichas/"+str(alumno[44])+str(alumno[43])+"/"+str(alumno[1]+" "+str(alumno[0]))+".docx")
         except Exception as e:

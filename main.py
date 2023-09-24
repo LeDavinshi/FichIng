@@ -12,8 +12,12 @@ from tkinter import ttk
 from confirmacion import confirmacion 
 from guardadorPuntual import guardadorPuntual
 
-guardar #guarda una copia de la base de datos con su fecha y nombre
-eliminar #eliminar una copia de la base de datos si tiene una antiguedad de 15 dias siempre quedan los ultimos 5 archivos copiados
+guardar #llamamos a una funcion que guarda una copia de la base de datos con su fecha y nombre
+eliminar #llamamos una funcion que eliminar una copia de la base de datos si tiene una antiguedad de 15 dias siempre quedan los ultimos 5 archivos copiados
+
+ventana = tk.Tk()
+ventana.title("FichApp V 2.6.1")
+ventana.configure(bg='gray')
 
 def guardar_datos():
     try:
@@ -383,11 +387,6 @@ def padreEmer():
     entry_emergencia.delete(0, tk.END)
     entry_emergencia.insert(0, entry_nombre_padre.get())
 
-
-ventana = tk.Tk()
-ventana.title("FichApp V 2.6.1")
-ventana.configure(bg='gray')
-#boton imprimir
 
 # Campos de entrada
 #=====================================================================#

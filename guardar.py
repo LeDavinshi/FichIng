@@ -28,6 +28,7 @@ nombre_carpeta = "Documents/DBD"
 nombre_archivo_copia = cadena_hora + ".db"
 ruta_carpeta_copia = Path.home() / nombre_carpeta
 ruta_archivo_copia = ruta_carpeta_copia / nombre_archivo_copia
+print (ruta_carpeta_copia)
 
 
 crear_copia_archivo(ruta_archivo_original, str(ruta_archivo_copia))
