@@ -1,5 +1,8 @@
 import sqlite3
 
+#ESTO CREA LA BASE DE DATOS PERO ES MUY RUDIMENTARIO, DEBERÍA IMPLEMENTAR UN SOLO CODIGO
+#QUE GENERE UNA NUEVA BASE DESDE 0 EN CASO DE QUE ESTA SE ELIMINE
+
 def crear_basedatos_desde_sql(sql_file, db_file):
     # Leer el contenido del archivo SQL
     with open(sql_file, 'r') as file:

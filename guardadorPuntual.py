@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jul  1 13:26:37 2023
-
-@author: Davinshi
+Codigo que genera la ficha puntual que se va a imprimir, debería haber sido una implementacion breve
+en guardado general seleccionando el alumno con un rut especifico pero me dio paja.
 """
-
-import sqlite3
 from datetime import date
 from docxtpl import DocxTemplate
+from time import sleep
+
+import sqlite3
+import os
+
 # Conectar a la base de datos
 def guardadorPuntual(rutAlumn):
     conexion = sqlite3.connect('FichaAlumnos.db')
@@ -19,8 +21,6 @@ def guardadorPuntual(rutAlumn):
     conexion.close()
     # Crear un nuevo documento de Word
     doc = DocxTemplate("ficha.docx")
-    
-    print ("visualizador")
     #cambiar booleanos por "si" y "no"
     def convertir_booleano(valor):
         return "Sí" if valor else "No"
@@ -77,6 +77,11 @@ def guardadorPuntual(rutAlumn):
             }
             doc.render(context)
             doc.save("ficha_puntual.docx")
+            print("IMPRIMIR DOCUMENTO")
+            os.startfile("ficha_puntual.docx", "print")
+            sleep(2)
+            os.startfile("ficha_puntual.docx", "print")
+            print("DOCUMENTO IMPRESO")
         except Exception as e:
             #alumnos que no se imprimen (posiblemente esten guardados ya)
             print("nombre:"+str(alumno[0]))

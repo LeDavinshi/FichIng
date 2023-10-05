@@ -1,12 +1,12 @@
 import tkinter as tk
 import sqlite3
-import os
-import keyboard
+import keyboard #me dio flojera hacer un programa que estandarize en tiempo real el rut por eso implementé esto (me da verguenza)
 
 import visualizador
 import buscarAlumno
 import guardar
 import eliminar
+
 
 from tkinter import ttk
 from confirmacion import confirmacion 
@@ -17,7 +17,7 @@ eliminar #llamamos una funcion que eliminar una copia de la base de datos si tie
 
 #Informacion basica de la pantalla
 ventana = tk.Tk()
-ventana.title("FichApp V 2.6.3")
+ventana.title("FichIng V 2.6.4")
 ventana.configure(bg='gray')
 
 #Funcion para guardar los datos que hay puestos en el programa
@@ -74,7 +74,7 @@ def guardar_datos():
                             figura_pate_var.get(),
                             fig_aporta_recursos_var.get(),
                             obtener_valor_predeterminado(entry_psicolog.get()),
-                            enfermedad_var.get(),
+                            obtener_valor_predeterminado(entry_enfermedad.get()),
                             obtener_valor_predeterminado(entry_aprende.get()),
                             obtener_valor_predeterminado(entry_estudia.get()),
                             obtener_valor_predeterminado(entry_religion.get()),
@@ -137,6 +137,7 @@ def limpiar_entradas():
     entry_emergencia.delete(0, tk.END)
     entry_domicilio.delete(0, tk.END)
     entry_celular.delete(0, tk.END)
+    entry_enfermedad.delete(0, tk.END)
     #booleanos y menues
     selected_letra.set("Nulo")
     selected_option.set("Nulo")
@@ -147,7 +148,7 @@ def limpiar_entradas():
     locomocion_var.set(False)
     presento_certificado_var.set(False)
     necesita_PAE_var.set(False)
-    enfermedad_var.set(False)
+    #enfermedad_var.set(False)
     asistereligion_var.set(False)
     locomocion_var.set(False)
     
@@ -202,7 +203,7 @@ def editar_alumno():
         figura_pate_var.set(alumno[30])
         fig_aporta_recursos_var.set(alumno[31])
         entry_psicolog.insert(0, alumno[32])
-        enfermedad_var.set(alumno[33])
+        entry_enfermedad.insert(0, alumno[33])
         entry_aprende.insert(0, alumno[34])
         entry_estudia.insert(0, alumno[35])
         entry_religion.insert(0, alumno[36])
@@ -321,7 +322,7 @@ def actualizardatos():
                            figura_pate_var.get(),
                            fig_aporta_recursos_var.get(),
                            obtener_valor_predeterminado(entry_psicolog.get()),
-                           enfermedad_var.get(),
+                           obtener_valor_predeterminado(entry_enfermedad.get()),
                            obtener_valor_predeterminado(entry_aprende.get()),
                            obtener_valor_predeterminado(entry_estudia.get()),
                            obtener_valor_predeterminado(entry_religion.get()),
@@ -371,8 +372,6 @@ def verificaciones():
 #FUNCION DE IMPRIMIR ARCHIVO, DEBERIA IMPRIMIRLO 2 VECES PERO NO FUNCIONA
 def imprimir_archivo():
     guardadorPuntual(entry_rut.get())  
-    os.startfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ficha_puntual.docx"), "print")
-    os.startfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "ficha_puntual.docx"), "print")
 
 # BOTONES QUE ESCRIBEN AUTOMATICAMENTE SI LA MADRE O EL PADRE ES APODERADO O SUPLENTE.
 def madreApod():
@@ -536,8 +535,9 @@ entry_nombre_contest_encuesta.grid(row=11, column=1)
 entry_nombre_contest_encuesta.bind("<Return>", on_enter)
 
 #=====================================================================#
-
-label_jefe_hogar = tk.Label(ventana, text="Jefe Hogar:",bg="lightgreen",width=21)
+#SE ME PIDIÓ CAMBIAR EL DATO "Jefe_hogar" por con quien vive, voy a cambiar solamente
+#el texto
+label_jefe_hogar = tk.Label(ventana, text="Con quien vive:",bg="lightgreen",width=21)
 label_jefe_hogar.grid(row=12, column=0)
 entry_jefe_hogar = tk.Entry(ventana,width=34)
 entry_jefe_hogar.grid(row=12, column=1)
@@ -673,7 +673,7 @@ ano_madre_menu.grid(row=19, column=3)
 
 #=====================================================================#
 
-label_ocupacion_jefe = tk.Label(ventana, text="Ocupación Jefe Hogar:", bg="pink",width=21)
+label_ocupacion_jefe = tk.Label(ventana, text="Ocupación de con quien vive:", bg="pink",width=21)
 label_ocupacion_jefe.grid(row=21, column=0)
 entry_ocupacion_jefe = tk.Entry(ventana)
 entry_ocupacion_jefe.grid(row=21, column=1)
@@ -699,6 +699,14 @@ label_psicolog.grid(row=25, column=0)
 entry_psicolog = tk.Entry(ventana)
 entry_psicolog.grid(row=25, column=1)
 entry_psicolog.bind("<Return>", on_enter)
+
+#=====================================================================#
+
+label_enfermedad = tk.Label(ventana, text="Enfermedad Prolongada", bg="pink",width=15)
+label_enfermedad.grid(row=25, column=2)
+entry_enfermedad = tk.Entry(ventana)
+entry_enfermedad.grid(row=25, column=3)
+entry_enfermedad.bind("<Return>", on_enter)
 
 #=====================================================================#
 
@@ -798,9 +806,10 @@ label_mensaje = tk.Label(ventana, text="",bg="gray")
 label_mensaje.grid(row=26, column=6, columnspan=1)
 #=====================================================================#
 
-enfermedad_var = tk.BooleanVar()
-check_enfermedad = tk.Checkbutton(ventana, text="Enfermedad prolongada", variable=enfermedad_var, bg="pink")
-check_enfermedad.grid(row=25, column=2)
+#enfermedad no es booleano, se quita de aquí y se mueve arriva
+# enfermedad_var = tk.BooleanVar()
+# check_enfermedad = tk.Checkbutton(ventana, text="Enfermedad prolongada", variable=enfermedad_var, bg="pink")
+# check_enfermedad.grid(row=25, column=2)
 
 #=====================================================================#
 
