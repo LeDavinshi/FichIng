@@ -17,7 +17,7 @@ eliminar #llamamos una funcion que eliminar una copia de la base de datos si tie
 
 #Informacion basica de la pantalla
 ventana = tk.Tk()
-ventana.title("FichIng V 2.6.4")
+ventana.title("FichIng V 2.6.5")
 ventana.configure(bg='gray')
 
 #Funcion para guardar los datos que hay puestos en el programa
@@ -702,7 +702,7 @@ entry_psicolog.bind("<Return>", on_enter)
 
 #=====================================================================#
 
-label_enfermedad = tk.Label(ventana, text="Enfermedad Prolongada", bg="pink",width=15)
+label_enfermedad = tk.Label(ventana, text="Enfermedad", bg="pink",width=15)
 label_enfermedad.grid(row=25, column=2)
 entry_enfermedad = tk.Entry(ventana)
 entry_enfermedad.grid(row=25, column=3)
