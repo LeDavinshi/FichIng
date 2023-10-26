@@ -8,7 +8,6 @@ def busqueda():
     def on_key(event):
         entry_widget = event.widget
         text = entry_widget.get()
-        print(len(text))
         
         if (len(text)==2 or len(text)==6) and keyboard.is_pressed("backspace")!=True:
             entry_widget.insert(tk.END,".")

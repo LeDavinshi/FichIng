@@ -20,7 +20,6 @@ def visualizador():
     # Crear un nuevo documento de Word
     doc = DocxTemplate("ficha.docx")
     
-    print ("visualizador")
     #cambiar booleanos por "si" y "no"
     def convertir_booleano(valor):
         return "Sí" if valor else "No"
@@ -82,5 +81,6 @@ def visualizador():
             doc.save("fichas/"+str(alumno[44])+str(alumno[43])+"/"+str(alumno[1]+" "+str(alumno[0]))+".docx")
         except Exception as e:
             #alumnos que no se imprimen (posiblemente esten guardados ya)
-            print("nombre:"+str(alumno[0]))
-            print("rut:"+alumno[1]+str(alumno[0]))
+            #print("nombre:"+str(alumno[0]))
+            #print("rut:"+alumno[1]+str(alumno[0]))
+            return

@@ -34,7 +34,6 @@ def guardar_datos():
 
         if resultado:
             # Actualizar los datos del alumno
-            print("resultado")
             actualizardatos()
             
         else:
@@ -156,11 +155,9 @@ def limpiar_entradas():
 #utriliza el rut para cargarlo en el sistema
 #NO MODIFICA AL ALUMNO SINO QUE CARGA SUS DATOS EN LOS RECUADROS
 def editar_alumno():
-    print("dato")
     dato=buscarAlumno.busqueda()
     if (dato!=""):
         limpiar_entradas()
-    print("dato :"+dato)
     mostrar_mensaje("Alumno Cargado","green")
     conexion = sqlite3.connect('FichaAlumnos.db')
     cursor = conexion.cursor()
@@ -252,7 +249,6 @@ def on_enter(event):
 def on_key(event):
     entry_widget = event.widget
     text = entry_widget.get()
-    print(len(text))
     
     if (len(text)==2 or len(text)==6) and keyboard.is_pressed("backspace")!=True:
         entry_widget.insert(tk.END,".")
