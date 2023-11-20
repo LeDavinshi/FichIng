@@ -17,7 +17,7 @@ eliminar #llamamos una funcion que eliminar una copia de la base de datos si tie
 
 #Informacion basica de la pantalla
 ventana = tk.Tk()
-ventana.title("FichIng V 2.6.5")
+ventana.title("FichIng V 2.6.7")
 ventana.configure(bg='gray')
 
 #Funcion para guardar los datos que hay puestos en el programa

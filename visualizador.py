@@ -2,10 +2,21 @@ import sqlite3
 from datetime import date
 from docxtpl import DocxTemplate
 import os
-
+import tkinter as tk
+from tkinter import ttk
 #VISUALIZADOR SE DEDICA A GENERAR LOS ARCHIVOS DE FICHA Y LOS SEPARA POR CARPETA DE CURSOS
 
 def visualizador():
+    root = tk.Tk()
+    root.title("Progreso")
+    root.geometry("400x100")
+
+    progress = ttk.Progressbar(root, orient="horizontal", length=300, mode="determinate")
+    progress.pack(pady=20)
+
+    label = tk.Label(root, text="Generando fichas...")
+    label.pack()
+    
     #genera la carpeta Fichas
     if not os.path.exists("fichas"):
         os.makedirs("fichas")
@@ -17,6 +28,10 @@ def visualizador():
     cursor.execute("SELECT * FROM alumnos")
     datos_alumnos = cursor.fetchall()
     conexion.close()
+    
+    total_alumnos = len(datos_alumnos)
+    progress["maximum"] = total_alumnos
+    
     # Crear un nuevo documento de Word
     doc = DocxTemplate("ficha.docx")
     
@@ -24,7 +39,7 @@ def visualizador():
     def convertir_booleano(valor):
         return "Sí" if valor else "No"
     
-    for alumno in datos_alumnos:
+    for idx, alumno in enumerate(datos_alumnos):
         
         file_path = "fichas/{}{}/{}.docx".format(alumno[44], alumno[43], "{} {}".format(alumno[1], alumno[0]))
         if not os.path.exists(file_path):
@@ -84,3 +99,9 @@ def visualizador():
                 doc.save("fichas/"+str(alumno[44])+str(alumno[43])+"/"+str(alumno[1]+" "+str(alumno[0]))+".docx")
             except Exception as e:
                 return
+        progress["value"] = idx
+        label["text"] = f"Generando fichas... ({idx}/{total_alumnos})"
+        root.update()
+    label["text"] = "Fichas generadas correctamente"
+    root.destroy()
+visualizador()
