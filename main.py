@@ -15,11 +15,6 @@ from guardadorPuntual import guardadorPuntual
 guardar #llamamos a una funcion que guarda una copia de la base de datos con su fecha y nombre
 eliminar #llamamos una funcion que eliminar una copia de la base de datos si tiene una antiguedad de 15 dias siempre quedan los ultimos 5 archivos copiados
 
-#Informacion basica de la pantalla
-ventana = tk.Tk()
-ventana.title("FichIng V 2.6.7")
-ventana.configure(bg='gray')
-
 #Funcion para guardar los datos que hay puestos en el programa
 def guardar_datos():
     try:
@@ -403,6 +398,11 @@ def padreEmer():
     entry_emergencia.insert(0, entry_nombre_padre.get())
 
 
+#Informacion basica de la pantalla
+ventana = tk.Tk()
+ventana.title("FichIng V 2.6.8")
+ventana.configure(bg='gray')
+
 # CAMPOS DE ENTRADA
 #=====================================================================#
 label_curso = tk.Label(ventana, text="Curso:", bg="salmon")
@@ -669,7 +669,7 @@ ano_madre_menu.grid(row=19, column=3)
 
 #=====================================================================#
 
-label_ocupacion_jefe = tk.Label(ventana, text="Ocupación de con quien vive:", bg="pink",width=21)
+label_ocupacion_jefe = tk.Label(ventana, text="Ocupación Jefe de Hogar:", bg="pink",width=21)
 label_ocupacion_jefe.grid(row=21, column=0)
 entry_ocupacion_jefe = tk.Entry(ventana)
 entry_ocupacion_jefe.grid(row=21, column=1)
@@ -710,7 +710,7 @@ label_aprende = tk.Label(ventana, text="Aprende:", bg="pink",width=15)
 label_aprende.grid(row=26, column=0)
 
 # Opciones del menú desplegable
-opciones_aprende = ["con dificultad", "sin dificultad", "lentitud","rapidez"]
+opciones_aprende = ["Con Dificultad", "Sin Dificultad", "Con Lentitud","Con Rapidez"]
 entry_aprende = ttk.Combobox(ventana, values=opciones_aprende,width=10)
 entry_aprende.grid(row=26, column=1)
 
@@ -720,7 +720,7 @@ label_estudia = tk.Label(ventana, text="Estudia ", bg="pink",width=15)
 label_estudia.grid(row=26, column=2)
 
 # Opciones del menú desplegable
-opciones_estudia = ["siempre", "nunca", "a veces", "solo para pruebas"]
+opciones_estudia = ["Siempre", "Nunca", "A Veces", "Solo Para Pruebas"]
 entry_estudia = ttk.Combobox(ventana, values=opciones_estudia,width=14)
 entry_estudia.grid(row=26, column=3)
 
@@ -800,13 +800,6 @@ check_asistereligion = tk.Checkbutton(ventana, text="Asiste a Religión", variab
 check_asistereligion.grid(row=26, column=7,columnspan=2)
 label_mensaje = tk.Label(ventana, text="",bg="gray")
 label_mensaje.grid(row=26, column=6, columnspan=1)
-#=====================================================================#
-
-#enfermedad no es booleano, se quita de aquí y se mueve arriva
-# enfermedad_var = tk.BooleanVar()
-# check_enfermedad = tk.Checkbutton(ventana, text="Enfermedad prolongada", variable=enfermedad_var, bg="pink")
-# check_enfermedad.grid(row=25, column=2)
-
 #=====================================================================#
 
 fig_aporta_recursos_var = tk.BooleanVar()

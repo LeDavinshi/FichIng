@@ -104,4 +104,3 @@ def visualizador():
         root.update()
     label["text"] = "Fichas generadas correctamente"
     root.destroy()
-visualizador()
