@@ -78,7 +78,7 @@ def visualizador():
                 'figura_pate': convertir_booleano(alumno[30]),
                 'fig_aporta_recursos': convertir_booleano(alumno[31]),
                 'psicolog': alumno[32],
-                'enfermedad': convertir_booleano(alumno[33]),
+                'enfermedad': alumno[33],
                 'aprende': alumno[34],
                 'estudia': alumno[35],
                 'religion': alumno[36],

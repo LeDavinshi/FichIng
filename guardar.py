@@ -1,10 +1,6 @@
 import os
 import shutil
 from datetime import datetime
-from pathlib import Path
-import crearCarpeta
-
-#guarda una copia de seguridad del archivo principal de la base de datos.
 
 directorio_actual = os.getcwd()
 print(directorio_actual)
@@ -20,15 +16,10 @@ def crear_copia_archivo(ruta_original, ruta_copia):
     except IsADirectoryError:
         print("La ruta especificada es un directorio.")
 
-# Ejemplo de 
-crearCarpeta
 ruta_archivo_original = os.path.join(directorio_actual, "FichaAlumnos.db")
-print(ruta_archivo_original)
 nombre_carpeta = "Documents/DBD"
 nombre_archivo_copia = cadena_hora + ".db"
-ruta_carpeta_copia = Path.home() / nombre_carpeta
-ruta_archivo_copia = ruta_carpeta_copia / nombre_archivo_copia
-print (ruta_carpeta_copia)
+ruta_carpeta_copia = os.path.join(os.path.expanduser("~"), nombre_carpeta)
+ruta_archivo_copia = os.path.join(ruta_carpeta_copia, nombre_archivo_copia)
 
-
-crear_copia_archivo(ruta_archivo_original, str(ruta_archivo_copia))
+crear_copia_archivo(ruta_archivo_original, ruta_archivo_copia)

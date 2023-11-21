@@ -400,7 +400,7 @@ def padreEmer():
 
 #Informacion basica de la pantalla
 ventana = tk.Tk()
-ventana.title("FichIng V 2.6.8")
+ventana.title("FichIng V 2.6.9")
 ventana.configure(bg='gray')
 
 # CAMPOS DE ENTRADA
